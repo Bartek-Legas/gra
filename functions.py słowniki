@@ -1,0 +1,53 @@
+import uuid
+
+def inf(lst):
+    """ Funkcja do wyświetlania informacji o książkach """
+    for dic in lst:
+        print(f"ID: {dic['id']}")
+        print(f"Nazwa: {dic['nazwa']}")
+        print(f"Liczba stron: {dic['liczbaStron']}")
+        print("---" * 10)
+
+
+def dodawanie(lst):
+    """ Funkcja do dodawania nowej książki """
+    nazwa = input("Podaj nazwę książki: ")
+    liczba_stron = input("Podaj liczbę stron: ")
+
+    nowa_ksiazka = {
+        "id": str(uuid.uuid4()),  
+        "nazwa": nazwa,
+        "liczbaStron": liczba_stron
+    }
+
+    lst.append(nowa_ksiazka)
+    print("Książka została dodana!")
+
+
+def edycja(lst):
+    book_id = input("Podaj ID książki do edycji: ")
+
+    for ksiazka in lst:
+        if ksiazka["id"] == book_id:
+            print("Obecne dane książki:")
+            print(f"Nazwa: {ksiazka['nazwa']}")
+            print(f"Liczba stron: {ksiazka['liczbaStron']}")
+
+            ksiazka["nazwa"] = input("Podaj nową nazwę: ")
+            ksiazka["liczbaStron"] = input("Podaj nową liczbę stron: ")
+            print("Książka została zaktualizowana!")
+            return
+
+    print("Nie znaleziono książki o podanym ID")
+
+
+def usuwanie(lst):
+    book_id = input("Podaj ID książki do usunięcia: ")
+
+    for ksiazka in lst:
+        if ksiazka["id"] == book_id:
+            lst.remove(ksiazka)
+            print("Książka została usunięta!")
+            return
+
+    print("Nie znaleziono książki o podanym ID")
